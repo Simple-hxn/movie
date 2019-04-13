@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mv.sys.dao.SysCategoryDao">
+    <select id="findCategorys" resultType="com.mv.common.vo.Node">
+	  	select * from sys_category
+	  </select>
+    <select id="findObjectById" resultType="com.mv.common.vo.Node">
+	  	select * from sys_category where id = #{id}
+	  </select>
+</mapper>

@@ -1,0 +1,127 @@
+
+<!-- 一个电影列表 -->
+	<div class="col-sm-3" id="dataContainerId" style="display: none">
+		<div class="thumbnail">
+			<!--span class="e-label"><div>Sale</div></span-->
+			<span class="service-link text-center"> <img id="imgId"
+			style="width:200px;height: 260px"
+				class="img-responsive" src="images/f-pro-1.jpg" alt="">
+				<div class="list-inline">
+					<a href=""><i class="fa fa-eye"></i></a> <a href=""><i
+						class="fa fa-link"></i></a>
+				</div>
+			</span>
+			<div class="caption">
+				<div class="category" id="filmName">
+					小城故事
+				</div>
+				<div class="pull-right" id="starId">
+					<i id="star" class="fa fa-star"></i>
+				</div>
+				<h3 id="introduce">叭叭叭叭叭叭</h3>
+				<strong>免费</strong>
+				<div>
+					<a href="#" class="btn btn-default" role="button">下载</a><span
+						class="pull-right"><i class="fa fa-heart-o"></i> 收藏</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 一个电影列表 -->
+	
+<!-- 电影列表 -->
+<div id="movieClumns">
+	<section class="featured-product">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="">
+						<h1>
+							<span class="t-color-1">电影</span>
+						</h1>
+						<div class="heading-border b-color-1"></div>
+					</div>
+				</div>
+			</div>
+			<!-- section title -->
+			<div id="carousel-example-generic" class="carousel slide"
+				data-ride="carousel">
+				<ol class="carousel-indicators" id="pageId">
+					<li id="leftId" data-target="#carousel-example-generic" data-slide-to="0"
+						class="active"><i class="fa fa-angle-left"></i></li>
+					<li id="rightId" data-target="#carousel-example-generic" data-slide-to="1"><i
+						class="fa fa-angle-right"></i></li>
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<div class="item active" id="active">
+						<div class="row" id="rowId">
+							
+						 <!-- 插入单个电影列表对象 -->	
+							
+						</div>
+					</div>
+				</div>
+	</section>
+
+
+
+<script type="text/javascript">
+	$(function() {
+		var category = $("#movieClumns").data("category");
+		if (!category) {
+			category = "包含名称的所有电影";
+		}
+		category = category+"片";
+
+		$(".t-color-1").html(category);
+		
+		// 添加页面跳转事件
+		//$("#pageId").on("click", "#leftId, #rightId", doJumpToPage)
+		
+		doInitPage();
+
+
+	})
+	
+	function doInitPage() {
+		var data = $("#movieClumns").data("data");
+		for (var i in data) {
+			var cloneDiv = $("#dataContainerId").clone(true);
+			// 将div显示
+			$(cloneDiv).css("display", "block");
+			$(cloneDiv).find(".category").html(data[i].name);
+			$(cloneDiv).find("#introduce").html(data[i].lable);
+			$(cloneDiv).find("img").prop("src", data[i].route);
+			// 修改是否是vip
+			var strong = data[i].vip?"vip":"免费";
+			$(cloneDiv).find("strong").html(strong);
+			// 修改评分
+			doAddGrade(data[i].grade, cloneDiv);
+			// 克隆展示电影div
+			$("#rowId").append(cloneDiv);
+		}
+	}
+	
+
+	// 点击上一页
+	/* function doJumpToPage() {
+		// 我们在跳转页码之前，我们先要取出当前页码的数据（pageCurrent,pageCount）
+ 		var pageCurrent = $("#pageId").data("pageCurrent");
+ 		var pageCount = $("#pageId").data("pageCount");
+ 		// 我们获取点击对象的class属性
+ 		var id = $(this).prop("id"); //property属性操作，可以取出属性，有额可以设置属性 prop,attr prop是js1.7出的方法，我们用prop方法
+ 		// 根据不同的点击对象，我们对页码数做出相应的修改
+ 		if (id == "leftId" && pageCurrent > 1) {   // 点击上页，我们必须要判断页码数是否大于1，大于1，我们才可以对页码数进行--
+ 			pageCurrent--;
+ 		} else if (id == "rightId" && pageCurrent < pageCount) {   // 点击下页，我们要判断当前页码数是否小于pageCount，我们才对页码数进行++
+ 			pageCurrent++;
+ 		} 
+ 		$("#pageId").data("pageCurrent", pageCurrent);
+ 		// 在加载数据之前，先把div清理了在加载
+		$("#rowId").empty();
+ 		// 最后我们直接执行ajax方法
+ 		doGetObjcets();
+ 	} */
+</script>
+

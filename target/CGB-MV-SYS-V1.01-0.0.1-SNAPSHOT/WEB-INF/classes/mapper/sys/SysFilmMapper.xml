@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mv.sys.dao.SysFilmDao">
+
+	<sql id="columns">
+		id,name,lable,on_time,grade,introduce,category_id,area,route,vip,voidelink
+	</sql>
+
+	<sql id="pageWhere1">
+		<where>
+			<if test="categoryId!=null and categoryId !=''">
+				category_id=#{categoryId}
+			</if>
+		</where>
+	</sql>
+	<!-- 基于分类的分页 -->
+	<select id="selectObjects" resultMap="filmRM">
+		select
+		<include refid="columns"/>
+		from sys_film
+		<include refid="pageWhere1"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+
+
+	<!-- 根据电影名查询链接 -->
+	<select id="finddownFilmByName" resultMap="filmRM">
+		select voidelink
+		from sys_film
+		where name=#{name}
+	</select>
+
+
+	<!-- 根据电影名查询 -->
+	<select id="findFilmByName" resultMap="filmRM">
+		select * from (
+		select * from sys_film
+		where name
+		like concat('%',#{name},'%' )
+		)f1 where f1.name like concat('%',#{name},'%' )
+	</select>
+	<!-- 查询所有的记录数 -->
+	<select id="getAllCount" resultType="int">
+		select count(id)
+		from sys_film
+		<include refid="pageWhere1"/>
+	</select>
+
+	<select id="findFilmById" resultMap="filmRM">
+		select *
+		from sys_film
+		where id = #{id}
+	</select>
+	<sql id="pageWhere">
+		<where>
+			<if test="name!=null and name!=''">
+				name like concat("%",#{name},"%")
+			</if>
+		</where>
+	</sql>
+	<select id="getRowCount1" resultType="int">
+		select count(*)
+		from sys_film
+		<include refid="pageWhere"/>
+	</select>
+	<select id="findPageObjects" resultType="map">
+		select  c.*,(select p.name from sys_category p where p.id = c.category_id) category
+		from sys_film c
+		<include refid="pageWhere"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	<select id="findObjects" resultMap="filmRM">
+		select  c.*
+		from sys_film c
+		<include refid="pageWhere"/>
+		limit #{startIndex},#{pageSize}
+	</select>
+	<select id="findObjectsByFilmNames" resultMap="filmRM">
+		select
+		<include refid="columns"/>
+		from sys_film
+		where name in
+		<foreach collection="filmNames"
+				 open="(" close=")" item="filmName" separator=",">
+			#{filmName}
+		</foreach>
+	</select>
+	<delete id="delteObjects">
+		delete from sys_film
+		where id in
+		<foreach collection="ids" open="(" close=")" separator="," item="item">
+			#{item}
+		</foreach>
+	</delete>
+	<insert id="insertFilm"
+			parameterType="com.mv.sys.entity.SysFilm"
+			useGeneratedKeys="true"
+			keyProperty="id">
+          insert into sys_film
+          (name,lable,on_time,grade,introduce,category_id,area,
+           route,voidelink,vip)
+           values
+          (#{name},#{lable},#{onTime},
+           #{grade},#{introduce},#{categoryId},#{area},#{route},#{voidelink},#{vip}
+          )
+     </insert>
+	<update id="updateObject">
+		update sys_film
+		<set>
+			<if test="name!=null and name!=''">
+				name=#{name},
+			</if>
+			<if test="lable!=null and lable!=''">
+				lable=#{lable},
+			</if>
+			<if test="onTime!=null and onTime!=''">
+				on_time=#{onTime},
+			</if>
+			<if test="grade!=null and grade!=''">
+				grade=#{grade},
+			</if>
+			<if test="introduce!=null and introduce!=''">
+				introduce=#{introduce},
+			</if>
+			<if test="categoryId!=null and categoryId!=''">
+				category_id=#{categoryId},
+			</if>
+			<if test="area!=null and area!=''">
+				area=#{area},
+			</if>
+			<if test="route!=null and route!=''">
+				route=#{route},
+			</if>
+			<if test="voidelink!=null and voidelink!=''">
+				voidelink=#{voidelink},
+			</if>
+			<if test="vip!=null and vip!=''">
+				vip=#{vip},
+			</if>
+		</set>
+		where id=#{id}
+	</update>
+	<resultMap id="filmRM" type="com.mv.sys.entity.SysFilm" >
+		<id column="id" property="id"/>
+		<result column="on_time" property="onTime"/>
+		<result column="category_id" property="categoryId"/>
+	</resultMap>
+</mapper>
+
+
+
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+  <!--"http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.mv.sys.dao.SysFilmDao">-->
+	<!--<select id="findFilmById" resultMap="filmRM">-->
+		<!--select *-->
+		<!--from sys_film-->
+		<!--where id = #{id}-->
+	<!--</select>-->
+
+	<!--<sql id="pageWhere">-->
+		<!--<where>-->
+			<!--<if test="name!=null and name!=''">-->
+				<!--name like concat("%",#{name},"%")-->
+			<!--</if>-->
+		<!--</where>-->
+	<!--</sql>-->
+	<!--&lt;!&ndash; 整合ehcache框架 &ndash;&gt;-->
+    <!--&lt;!&ndash; <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> &ndash;&gt;-->
+	<!--<sql id="columns">-->
+		<!--id,name,lable,on_time,grade,introduce,category_id,area,route,vip-->
+	<!--</sql>-->
+	<!---->
+	<!--&lt;!&ndash;<sql id="pageWhere">&ndash;&gt;-->
+		<!--&lt;!&ndash;<where>&ndash;&gt;-->
+			<!--&lt;!&ndash;<if test="categoryId!=null and categoryId !=''">&ndash;&gt;-->
+				<!--&lt;!&ndash;category_id=#{categoryId}&ndash;&gt;-->
+			<!--&lt;!&ndash;</if>&ndash;&gt;-->
+		<!--&lt;!&ndash;</where>&ndash;&gt;-->
+	<!--&lt;!&ndash;</sql>&ndash;&gt;-->
+	<!---->
+	<!--&lt;!&ndash;&lt;!&ndash; 自动匹配驼峰模式 &ndash;&gt;&ndash;&gt;-->
+	<!--&lt;!&ndash;<resultMap id="filmRM" type="com.mv.sys.entity.SysFilm" autoMapping="true"/>&ndash;&gt;-->
+	<!--&lt;!&ndash;&ndash;&gt;-->
+	<!--&lt;!&ndash; 基于分类的分页 &ndash;&gt;-->
+	<!--&lt;!&ndash;<select id="selectObjects" resultMap="filmRM">&ndash;&gt;-->
+	   <!--&lt;!&ndash;select &ndash;&gt;-->
+	   <!--&lt;!&ndash;<include refid="columns"/>&ndash;&gt;-->
+	   <!--&lt;!&ndash;from sys_film&ndash;&gt;-->
+	   <!--&lt;!&ndash;<include refid="pageWhere"/>&ndash;&gt;-->
+	   <!--&lt;!&ndash;limit #{startIndex},#{pageSize}&ndash;&gt;-->
+	<!--&lt;!&ndash;</select>&ndash;&gt;-->
+	<!---->
+	<!--&lt;!&ndash; 查询所有的记录数 &ndash;&gt;-->
+	<!--<select id="getRowCount" resultType="int">-->
+		<!--select count(*)-->
+		<!--from sys_film-->
+		<!--<include refid="pageWhere"/>-->
+	<!--</select>-->
+
+	<!--<select id="findPageObjects" resultType="map">-->
+		<!--select  c.*,(select p.name from sys_category p where p.id = c.category_id) category-->
+		<!--from sys_film c-->
+		<!--<include refid="pageWhere"/>-->
+		<!--limit #{startIndex},#{pageSize}-->
+	<!--</select>-->
+	<!--<select id="findObjects" resultMap="filmRM">-->
+		<!--select  c.*-->
+		<!--from sys_film c-->
+		<!--<include refid="pageWhere"/>-->
+		<!--limit #{startIndex},#{pageSize}-->
+	<!--</select>-->
+
+
+
+
+
+	<!---->
+
+	<!--<delete id="delteObjects">-->
+		<!--delete from sys_film-->
+		<!--where id in-->
+		<!--<foreach collection="ids" open="(" close=")" separator="," item="item">-->
+			<!--#{item}-->
+		<!--</foreach>-->
+	<!--</delete>-->
+	<!--<insert id="insertFilm"-->
+			<!--parameterType="com.mv.sys.entity.SysFilm"-->
+			<!--useGeneratedKeys="true"-->
+			<!--keyProperty="id">-->
+          <!--insert into sys_film-->
+          <!--(name,lable,on_time,grade,introduce,category_id,area,-->
+           <!--route)-->
+           <!--values-->
+          <!--(#{name},#{lable},#{onTime},-->
+           <!--#{grade},#{introduce},#{categoryId},#{area},#{route}-->
+          <!--)-->
+     <!--</insert>-->
+	<!--<update id="updateObject">-->
+		<!--update sys_film-->
+		<!--<set>-->
+			<!--<if test="name!=null and name!=''">-->
+				<!--name=#{name},-->
+			<!--</if>-->
+			<!--<if test="lable!=null and lable!=''">-->
+				<!--lable=#{lable},-->
+			<!--</if>-->
+			<!--<if test="onTime!=null and onTime!=''">-->
+				<!--on_time=#{onTime},-->
+			<!--</if>-->
+			<!--<if test="grade!=null and grade!=''">-->
+				<!--grade=#{grade},-->
+			<!--</if>-->
+			<!--<if test="introduce!=null and introduce!=''">-->
+				<!--introduce=#{introduce},-->
+			<!--</if>-->
+			<!--<if test="categoryId!=null and categoryId!=''">-->
+				<!--category_id=#{categoryId},-->
+			<!--</if>-->
+			<!--<if test="area!=null and area!=''">-->
+				<!--area=#{area},-->
+			<!--</if>-->
+			<!--<if test="route!=null and route!=''">-->
+				<!--route=#{route},-->
+			<!--</if>-->
+		<!--</set>-->
+		<!--where id=#{id}-->
+	<!--</update>-->
+	<!--<resultMap id="filmRM" type="com.mv.sys.entity.SysFilm" >-->
+		<!--<id column="id" property="id"/>-->
+		<!--<result column="on_time" property="onTime"/>-->
+		<!--<result column="category_id" property="categoryId"/>-->
+	<!--</resultMap>-->
+<!--</mapper>-->

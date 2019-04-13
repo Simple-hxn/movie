@@ -1,0 +1,126 @@
+<!-- Horizontal Form -->
+ <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">添加用户</h3>
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form class="form-horizontal">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="usernameId" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="usernameId">
+            </div>
+          </div>
+          <div class="form-group" id="pwdDivId">
+            <label for="passwordId" class="col-sm-2 control-label">密码</label>
+
+            <div class="col-sm-10">
+              <input type="password" class="form-control"  id="passwordId">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="vipLevel" class="col-sm-2 control-label">VIP等级</label>
+            <div class="col-sm-10">
+              <select id="vip">
+			 	 <option value="0">0</option>
+			 	 <option value="1">1</option>
+			 	 <option value="2">2</option>
+			 	 <option value="3">3</option>
+			  	 <option value="4">4</option>
+			  	 <option value="5">5</option>
+			  </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="powerLevel" class="col-sm-2 control-label">管理员权限</label>
+              <div class="col-sm-10">
+              <select id="conservator">
+				<option value="0">0</option>
+				<option value="1">1</option>
+			  </select>
+            </div>
+          </div>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+          <button type="button" class="btn btn-default btn-cancel">Cancel</button>
+          <button type="button" class="btn btn-info pull-right btn-save">Save</button>
+        </div>
+        <!-- /.box-footer -->
+      </form>
+    </div>
+<script type="text/javascript" src="bower_components/ztree/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="bower_components/layer/layer.js"></script>
+<script type="text/javascript">
+
+ $(document).ready(function(){
+	// var level = {"1", "2", "3", "4", "5"};
+	 //事件注册
+	 doInitFormData();
+	 $(".box-footer")
+	 .on("click",".btn-cancel",doCancel)
+	 .on("click",".btn-save",doSaveOrUpdate);
+	 
+ });
+ //确定按钮
+
+ function doCancel(){
+	console.log($("#tbodyId"));
+	$("#mainContentId").removeData("rowData");
+	$("#mainContentId").load("user/doUserList.do");
+ }
+ function doSaveOrUpdate(){
+	// var oSelect = document.getElementsByName("vip")[0];
+		//alert(oSelect.value);
+	
+	 var rowData=$("#mainContentId").data("rowData");
+	 //1.获取表单数据
+	 //console.log(rowData);
+	 var params=doGetEditFormData();
+	 if(rowData)params.id=rowData.id;
+	 //2.发起异步请求
+	 var insertUrl="user/doInsertObject.do";
+	 var updateUrl="user/doUpdateObject.do";
+
+	 $.getJSON(url,params,function(result){
+		 if(result.state==1){
+			 alert(result.message);
+			 doCancel();
+		 }else{
+			alert(result.message);
+		 }
+	 })
+ }
+  function doGetEditFormData(){
+	 //获取用户输入的数据
+	 var params={
+	    name:$("#usernameId").val(),
+	    password:$("#passwordId").val(),
+	    vip:$("#vip").val(),
+	    conservator:$("#conservator").val()
+	 }
+	 return params;
+ } 
+ 
+  function doInitFormData(){
+	 debugger
+     var data=$("#mainContentId").data("rowData");
+     if(!data)return;
+	 //初始化用户信息 
+	 $("#usernameId").val(data.name);
+	 $("#passwordId").val(data.password);
+	 $("#vip").val(data.vip);
+	 $("#conservator").val(data.conservator);
+ } 
+ 
+</script>
+    
+    
+    
+    
+    
+    
+    

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>小姨妈的电影网站，专打迷你小故事</title>
+<!-- ALL STYLESHEET -->
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/font-awesome.min.css" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+<link href="css/responsive.css" rel="stylesheet">
+
+</head>
+<body>
+	<!-- header -->
+	<header class="header">
+		<!-- header top -->
+		<div class="header-top">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-3">
+						<ul class="list-inline">
+							<li>
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false"><img
+										src="images/china.jpg" alt="" />小姨妈专属电影网站</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-9">
+						<ul class="list-inline pull-right">
+							<li id="loginls"><a href="login.do"><i class="fa fa-user"></i>登陆</a></li>
+							<a id="username-login" href="#"></a>
+							<li id="out_login"><a href="login.do"><i class="fa fa-user"></i>退出</a></li>
+							<li><a href="javasript:void(0)" class="favorite"><i class="fa fa-heart-o"></i>收藏</a></li>
+							<li><a href="#"><i class="fa fa-file-o"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- header bottom -->
+		<div class="header-bottom">
+			<div class="row">
+				<div class="col-sm-12">
+					<nav class="navbar navbar-default">
+						<div class="container">
+							<!-- Brand and toggle get grouped for better mobile display -->
+							<div class="navbar-header">
+								<button type="button" class="navbar-toggle collapsed"
+									data-toggle="collapse" data-target="#header-bottom"
+									aria-expanded="false">
+									<span class="sr-only">Toggle navigation</span> <span
+										class="icon-bar"></span> <span class="icon-bar"></span> <span
+										class="icon-bar"></span>
+								</button>
+							</div>
+
+							<!-- Collect the nav links, forms, and other content for toggling -->
+							<div class="collapse navbar-collapse" id="header-bottom">
+								<ul class="nav navbar-nav">
+									<li class="active"><a href="javascript:void(0)" class="dropdown-toggle first-page"
+										data-toggle="dropdown" role="button" aria-haspopup="true"
+										aria-expanded="false"><span style="font-size: 20px">首页</span></a></span>
+									</li>
+									<li><a id="loveMV" href="javascript:void(0)"><span style="font-size: 20px">爱情</a></span> 
+									    <span class="label label-danger text-center hidden-xs">New 
+									    <i class="fa fa-caret-right"></i></span></li>	
+									<li><a id="schoolMV" href="javascript:void(0)"><span style="font-size: 20px">校园</span></a></li>
+									<li><a id ="costumeMV" href="javascript:void(0)"><span style="font-size: 20px">古风</span></a></li>
+									<li><a id ="comedyMV" href="javascript:void(0)"><span
+										   style="font-size: 20px">喜剧</span></a></li>
+									<li><a id="draculaMV" href="javascript:void(0)"><span style="font-size: 20px">恐怖 </a></span>
+									    <span class="label label-info text-center hidden-xs">New <i
+											  class="fa fa-caret-right"></i></span></li>
+									<li><a id="cartoonMV" href="javascript:void(0)"><span
+										   style="font-size: 20px">动画</span></a></li>
+								</ul>
+								<form class="navbar-form navbar-right" role="search">
+									<div class="form-group">
+										<input type="text" class="form-control"
+											placeholder="请搜索电影名"><span class="nav-search"><a
+											href="javascript:void(0)" class="fa fa-search"><i ></i></a></span>
+									</div>
+								</form>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+	
+	<!-- 轮播 -->
+	<section class="home">
+		<div class="intro">
+		<center>
+			<iframe src="lun/lunbo.html"  height="500px" width="1000px" frameborder="0" scrolling="no"></iframe>
+	    </center>
+			  <!-- Controls -->
+				<a class="left carousel-control" href="#home" role="button"
+					data-slide="prev"><i class="fa fa-angle-left"></i></a> <a
+					class="right carousel-control" href="#home" role="button"
+					data-slide="next"><i class="fa fa-angle-right"></i></a>
+		</div>
+	</section>
+	
+
+
+<!-- 一个电影列表 -->
+	<div class="col-sm-3" id="dataContainerId" style="display: none">
+		<div class="thumbnail">
+			<!--span class="e-label"><div>Sale</div></span-->
+			<span class="service-link text-center"> <img id="imgId"
+			style="width:200px;height: 260px"
+				class="img-responsive" src="images/f-pro-1.jpg" alt="">
+				<div class="list-inline">
+					<a href=""><i class="fa fa-eye"></i></a> <a href=""><i
+						class="fa fa-link"></i></a>
+				</div>
+			</span>
+			<div class="caption">
+				<div class="category" id="filmName">
+					小城故事
+				</div>
+				<div class="pull-right" id="starId">
+					<i id="star" class="fa fa-star"></i>
+				</div>
+				<h3 id="introduce">叭叭叭叭叭叭</h3>
+				<strong>免费</strong>
+				<div>
+					<a href="#" class="btn btn-default" role="button" id="down">下载</a><span
+						id="favoriteId" class="pull-right"><i class="fa fa-heart-o"></i> 收藏</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 一个电影列表 -->
+
+
+	
+<!-- 电影列表 -->
+<div id="movieClumns">
+	<section class="featured-product">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="">
+						<h1>
+							<span class="t-color-1">电影</span>
+						</h1>
+						<div class="heading-border b-color-1"></div>
+					</div>
+				</div>
+			</div>
+			<!-- section title -->
+			<div id="carousel-example-generic" class="carousel slide"
+				data-ride="carousel">
+				<ol class="carousel-indicators" id="pageId">
+					<li id="leftId" data-target="#carousel-example-generic" data-slide-to="0"
+						class="active"><i class="fa fa-angle-left"></i></li>
+					<li id="rightId" data-target="#carousel-example-generic" data-slide-to="1"><i
+						class="fa fa-angle-right"></i></li>
+				</ol>
+				<div class="carousel-inner" role="listbox">
+					<div class="item active" id="active">
+						<div class="row" id="rowId">
+							
+						 <!-- 插入单个电影列表对象 -->	
+							
+						</div>
+					</div>
+				</div>
+	</section>
+
+
+
+	<!-- social icons -->
+	<section class="social-icons">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">
+					<ul class="list-inline text-center">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-spotify"></i></a></li>
+						<li><a href="#"><i class="fa fa-tumblr"></i></a></li>
+						<li><a href="#"><i class="fa fa-share-alt"></i></a></li>
+						<li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+						<li><a href="#"><i class="fa fa-delicious"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram"></i></a></li>
+						<li><a href="#"><i class="fa fa-dropbox"></i></a></li>
+						<li><a href="#"><i class="fa fa-soundcloud"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-github-alt"></i></a></li>
+						<li><a href="#"><i class="fa fa-skype"></i></a></li>
+						<li><a href="#"><i class="fa fa-stumbleupon"></i></a></li>
+						<li><a href="#"><i class="fa fa-youtube"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<footer>
+		<div class="footer-bottom">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-12 text-center">
+						<p>
+							新一团 <a href="#">Bootultra.com</a>2018.10.20
+						</p>
+						<ul class="list-inline center-block">
+							<li><a href="#"><h3>
+							<span class="t-color-4">Top</span>
+									</h3></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	
+<!-- 引入所有的js文件 -->
+<script src="js/jquery.js"></script>
+<script src="js/download.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$("#username-login").hide();
+		$("#out_login").hide();
+		doafterLogin()
+		$("#header-bottom").on("click", "#loveMV, #schoolMV, #costumeMV, #comedyMV, #draculaMV, #cartoonMV", function () {
+			var category = $(this).children("span").html();
+			$("#movieClumns").data("category", category);
+			// 清空对象
+			$("#movieClumns").empty();
+			// 查询分类的数据
+			doQueryCateGorgObjects();
+
+		});
+
+
+		// 给电影名查找按钮添加事件
+		$(".nav-search").click(doQueryByName);
+
+		// 给首页添加事件,重新刷新主页面
+		$(".first-page").click(function () {
+			location.href = "doIndexUI.do";
+		});
+		// 给分页按钮添加事件
+		//$("#fa fa-angle-left").on("click", ".fa fa-angle-left", doLastPage);
+		$("#pageId").on("click", "#leftId, #rightId", doJumpToPage)
+		// 加载电影信息
+		doGetObjcets();
+
+		// 查询已经收藏的的电影,默认id=1的用户收藏。
+		$(".favorite").click(function () {
+			var url = "film/doFindObjectById.do";
+			$.post(url, function (result) {
+
+				if (result.state == 1) {
+					if(result.message=="请先登陆！"){
+						alert("请先登陆！")
+					}else {
+						$("#movieClumns").data("data", result.data);
+						// 跳转到query页面
+						doJumpQueryPage();
+					}
+
+				}
+			})
+
+		});
+
+		// 给电影添加点击事件
+		$("#imgId").click(function () {
+			var data = $(this).data("rowData");
+			// console.log("------")
+			// console.log(data)
+			// console.log("------")
+			//
+
+			if (data.vip != 0) {
+				$.post("film/doGetVIPByName.do", function (result) {
+
+					if (result.state == 1) {
+						var url = "doDetailUI.do";
+						$(".intro").css("display", "none");
+						$("#movieClumns").empty();
+						// 重新绑定数据到
+						$(".header-bottom").data("rowData", data);
+						$("#movieClumns").load(url);
+					} else {
+						alert(result.message)
+					}
+
+				});
+			} else {
+				var url = "doDetailUI.do";
+				$(".intro").css("display", "none");
+				$("#movieClumns").empty();
+				// 重新绑定数据到
+				$(".header-bottom").data("rowData", data);
+				$("#movieClumns").load(url);
+
+			}
+
+
+		});
+
+		// 给收藏添加事件
+		$("#favoriteId").click(function () {
+			// 获得容器的主对象
+			var obj = $(this).parents("#dataContainerId");
+			var data = $(obj).find("#imgId").data("rowData");
+			var params = {filmName: data.name};
+			var url = "film/doSaveObjectByName.do";
+			$.post(url, params, function (result) {
+
+				if (result.state == 1) {
+					alert(result.message)
+				}else {
+
+				}
+			});
+
+		})
+		//下载视频
+		$("#down").click(function () {
+			var obj = $(this).parents("#dataContainerId");
+			var data = $(obj).find("#imgId").data("rowData");
+			//判断是否vip影片，是则，请求后台资源映射地址
+			var con=confirm("确认下载吗？"); //在页面上弹出对话框
+			if(con==true){
+				if (data.vip==0){
+					var params = {"name": data.name};
+					$.post("film/doFindfilmlink.do", params, function (result) {
+						if(result.state==1){
+							var dataurl =result.message;
+							var x = new XMLHttpRequest();
+							x.open("GET", dataurl, true);
+							x.responseType = 'blob';
+							x.onload = function (e) {download(x.response, "下载的视频.mp4", "video/mp4");
+							}
+							x.send()
+						}else {
+							alert(result.message)
+						}
+
+					})
+
+				}else {
+					var params = {"name": data.name};
+					$.post("film/doFindfilmlinkvip.do", params, function (result) {
+						if(result.state==1){
+							var dataurl =result.message;
+							var x = new XMLHttpRequest();
+							x.open("GET", dataurl, true);
+							x.responseType = 'blob';
+							x.onload = function (e) {download(x.response, "下载的视频.mp4", "video/mp4");
+							}
+							x.send()
+						}else {
+							alert(result.message)
+						}
+
+					})
+
+				}
+
+
+			}else
+			{
+				alert("你取消了")
+			}
+
+
+		});
+	});
+
+
+
+
+
+
+
+
+	// 	})
+	// });
+	//
+
+	
+	// 根据类名查询电影
+	function doQueryCateGorgObjects() {
+		$("#movieClumns").data("data", null);
+		doGetObjcets();
+		doJumpQueryPage();
+	}
+	
+	//根据电影名查询
+	function doQueryByName() {
+		// 先查数据再跳转
+	   var url = "film/doFindObjectByName.do"
+	   var name = $(".form-control").val();
+	   if (!name) {
+		   $(".form-control").prop("placeholder", "请输入内容^.^");
+	   }
+	   var params = {"name":name};
+	   $.post(url, params, function(result) {
+		   if (result.state == 1) {
+			   // 得到数据以后，绑定在movieClumns上
+			   $("#movieClumns").data("data", result.data);
+			   // 跳转到query页面
+			   doJumpQueryPage();
+		   } else {
+			   alert(result.message)
+		   }
+	   })
+	}
+	
+	function doJumpQueryPage(){
+		$(".intro").css("display", "none");
+		var url ="doCategoryPageUI.do?";
+		$("#movieClumns").load(url);
+	}
+	// 加载电影数据
+	function doGetObjcets() {
+		var url = "film/doFindPageObjects.do";
+		// 取出页码值
+		var pageCurrent = $("#pageId").data("pageCurrent");
+		// 取出分类名称
+		var category = $("#movieClumns").data("category");
+		var categoryId = 0;
+		// 转换成相对应的
+		if(category == "爱情") {
+			categoryId = 1;
+		}else if (category == "校园") {
+			categoryId = 2;
+		}else if (category == "古风") {
+			categoryId = 3;
+		}else if (category == "喜剧") {
+			categoryId = 4;
+		}else if (category == "恐怖") {
+			categoryId = 5;
+		}else if (category == "动画") {
+			categoryId = 6;
+		}
+		if(!pageCurrent){
+			pageCurrent = 1;
+		}
+		var params = {"pageCurrent":pageCurrent,
+					  "categoryId":categoryId};
+
+		$.getJSON(url, params, function(result){
+
+
+			if (result.data != null) {
+				if(result.state==1){
+					doInitData(result.data.records);
+					// 把页码信息绑定在pageId上
+					$("#pageId").data("pageCurrent", result.data.pageCurrent);
+					$("#pageId").data("pageCount", result.data.pageCount);
+				}else {
+					alert(result.message);
+				}
+
+			} else {
+				alert(result.message);
+			}
+		});
+	}
+	
+	// 初始化电影信息
+	function doInitData(data) {
+		for (var i in data) {
+			var cloneDiv = $("#dataContainerId").clone(true);
+			// 将div显示
+			$(cloneDiv).css("display", "block");
+			$(cloneDiv).find(".category").html(data[i].name);
+			$(cloneDiv).find("#introduce").html(data[i].lable);
+			$(cloneDiv).find("img").prop("src", data[i].route);
+			// 修改是否是vip
+			var strong = data[i].vip?"vip":"免费";
+			$(cloneDiv).find("strong").html(strong);
+			// 修改评分
+			doAddGrade(data[i].grade, cloneDiv);
+			// 把数据绑定到img对象上面，就是最大的div上面
+			$(cloneDiv).find("img").data("rowData", data[i]);
+			// 克隆展示电影div
+			$("#rowId").append(cloneDiv);
+		}
+	}
+	
+	// 修改评分系统，后端暂时未实现
+	function doAddGrade(data, cloneDiv) {
+		for(var i=0;i<data;i++){
+			var star = $("#star").clone(true);
+			$(cloneDiv).find("#starId").append(star);
+		}
+		// 最后删除被克隆的对象
+	    $(cloneDiv). find("#star").first().remove();
+	}
+	
+	// 点击上一页
+	function doJumpToPage() {
+		// 我们在跳转页码之前，我们先要取出当前页码的数据（pageCurrent,pageCount）
+ 		var pageCurrent = $("#pageId").data("pageCurrent");
+ 		var pageCount = $("#pageId").data("pageCount");
+ 		// 我们获取点击对象的class属性
+ 		var id = $(this).prop("id"); 
+ 		if (id == "leftId" && pageCurrent > 1) {   
+ 			pageCurrent--;
+ 		} else if (id == "rightId" && pageCurrent < pageCount) { 
+ 			pageCurrent++;
+ 		} 
+ 		$("#pageId").data("pageCurrent", pageCurrent);
+ 		// 在加载数据之前，先把div清理了在加载
+		$("#rowId").empty();
+ 		// 最后我们直接执行ajax方法
+ 		doGetObjcets();
+	}
+	//浏览记录实现,后端暂未实现
+	// function dofindLookFilm() {
+	// }
+//获取登陆状态：
+	function doafterLogin(){
+	 $.post("Penameseesion.do",function(result){
+
+		 if(result.state==1){
+			if (result.data!=null){
+				$("#loginls").hide()
+				$("#username-login").show();
+				$("#out_login").show();
+				for(var i=0;i<result.data.length;i++){
+					$("#username-login").html(result.data[i]);
+				}
+		}
+
+		 }else{
+			 alert(result.message)
+		 }
+
+	 })
+	}
+
+	// // 跳转到电影详情页,稍后实现。
+	// function doDetailPage() {
+	//
+	// }
+
+</script>
+</body>
+</html>

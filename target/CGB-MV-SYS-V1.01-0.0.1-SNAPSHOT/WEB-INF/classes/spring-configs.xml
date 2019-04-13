@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+  	   http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+	<!-- 配置组件扫描器 -->
+	<context:component-scan base-package="com.mv" />
+
+	<!--<mvc:resources mapping="/voide/**" location="/voide/**" />-->
+
+	<!-- 开启注解开发,利用注解 -->
+	<mvc:annotation-driven/>
+
+	<!-- 加入配置mvc,mybatis文件 -->
+	<import resource="classpath:spring-mvc.xml"/>
+	<import resource="classpath:spring-mybatis.xml"/>
+
+	<!-- 自己定义切面我们可以使用这个配置自己可以使用注解 -->
+	<!-- 配置AOP(启用AOP):借助注解方式应用aop -->
+	<aop:aspectj-autoproxy/>
+
+
+
+	<!-- 配置SercurityManager 对象
+              配置ShiroFilterFactoryBean对象-->
+	<bean id="SercurityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="Realm" ref="shiroUserRealm"></property>
+	</bean>
+
+	<bean id="shiroFilterFactory" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="SecurityManager" ref="SercurityManager"></property>
+		<property name="LoginUrl" value="/login.do"></property>
+		<!-- 定义过滤规则(那些资源需要匿名访问，那些资源必须授权访问) -->
+		<property name="FilterChainDefinitionMap">
+			<map>
+				<entry key="/bower_components/**" value="anon"/>
+				<entry key="/voide/**" value="anon"/>
+				<entry key="/build/**" value="anon"/>
+				<entry key="/dist/**" value="anon"/>
+				<entry key="/plugins/**" value="anon"/>
+				<entry key="/doLogin.do" value="anon"/>
+				<entry key="/doLogout.do" value="logout"/>
+				<!--<entry key="/**" value="authc"/>&lt;!&ndash; 必须认证 &ndash;&gt;-->
+			</map>
+		</property>
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"></bean>
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+		  depends-on="lifecycleBeanPostProcessor">
+	</bean>
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+		<property name="SecurityManager" ref="SercurityManager"/>
+	</bean>
+</beans>
+       

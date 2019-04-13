@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mv.sys.dao.SysUserDao">
+    <sql id="pageWhere">
+        <where>
+            <if test="userName!=null and userName !=''">
+                name like concat("%",#{userName},"%")
+            </if>
+        </where>
+    </sql>
+    <select id="findUserByName" resultType="com.mv.sys.entity.SysUser">
+     	select * from sys_user where name = #{username}
+     </select>
+    <select id="getRowCount" resultType="int">
+        select count(*)
+        from sys_user
+        <include refid="pageWhere"/>
+    </select>
+
+    <select id="findPageObjects" resultType="map">
+        select *
+        from sys_user
+        <include refid="pageWhere"/>
+        limit #{startIndex},#{pageSize}
+    </select>
+    <!-- 无条件查询数据库所有用户信息 -->
+    <select id="findUserObjects" resultType="com.mv.sys.entity.SysUser">
+		select *
+		from sys_user
+	</select>
+    <!--按用户id查询指定用户信息 -->
+    <select id="findObjectById" resultType="com.mv.sys.entity.SysUser">
+		select *
+		from sys_user
+		where id = #{id}
+	</select>
+    <!-- 根据用户id,修改指定用户数据 -->
+    <!-- 用户更新操作(更新自身信息) -->
+    <update id="updateObjectById">
+        update sys_user
+        <set>
+            <if test="name!=null and name!=''">
+                name=#{name},
+            </if>
+            <if test="password!=null and password!=''">
+                password=#{password},
+            </if>
+            <if test="vip!=null and vip!=''">
+                vip=#{vip},
+            </if>
+            <if test="conservator!=null and conservator!=''">
+                conservator=#{conservator},
+            </if>
+            <if test="salt!=null and salt !=''">
+                salt=#{salt},
+            </if>
+            <if test="updateUser!=null and updateUser !=''">
+                updateUser=#{updateUser},
+            </if>
+            updateTime = now(),
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteObject">
+        delete from sys_user where id in
+        <foreach collection="ids" open="(" close=")" separator="," item="item">
+            #{item}
+        </foreach>
+    </delete>
+    <insert id="insertObject" parameterType="com.mv.sys.entity.SysUser">
+     	insert into sys_user
+       (name,password,salt,vip,conservator,createUser,createTime,updateTime)
+       values
+       (#{name},#{password},#{salt},#{vip},#{conservator},#{createUser},now(),now())
+     </insert>
+</mapper>

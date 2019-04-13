@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mv.sys.dao.SysUserFilmDao">
+	<!-- 整合ehcache框架 -->
+    <!-- <cache type="org.mybatis.caches.ehcache.EhcacheCache"/> -->
+    
+	<insert id="insertObjectByName">
+		insert into sys_user_film(user_id,film_name)
+		values(#{userId},#{filmName})
+	</insert>
+	
+	<select id="findObjectById" resultType="string">
+	  select film_name from sys_user_film
+		where user_id=#{userId}
+	</select>
+</mapper>

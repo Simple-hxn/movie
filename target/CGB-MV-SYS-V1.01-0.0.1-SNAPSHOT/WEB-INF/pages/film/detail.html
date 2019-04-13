@@ -1,0 +1,123 @@
+
+
+<div class="clearfix block1"
+	style="margin: 0 auto; text-align: center; width: 1000px; height: 800px; padding-top: 50px">
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<!-- 影片信息 -->
+					<div id="minfo" class="clearfix">
+						<div class="img">
+							<img id="detailImgId" src="" style="width: 450px; height: 550px;"
+								alt="狄仁杰之四大天王" title="狄仁杰之四大天王" /> <br />
+
+							<div class="ssbutton">
+								<a rel="nofollow"
+									href="javascript:$('html,body').animate({scrollTop:$('#screenshots').offset().top},300);">
+									<i  class="fa fa-camera-retro"></i>
+									<button id="voidplay">在线播放</button>
+								</a>
+							</div>
+						</div>
+				</td>
+				<td >
+					<!--影片信息-->
+					<link href="https://static-80s.b0.upaiyun.com/css/reveal.css"
+						rel="stylesheet" type="text/css" /> <script language="javascript"
+						src="https://static-80s.b0.upaiyun.com/js/jquery.reveal.js"></script>
+
+					<div class="info" style="padding-bottom: 200px;width: 400px;padding-left: 40px">
+						<a href="http://www.80s.tw/blog/?id=3" target="_blank"> <span
+							class="version4 versionico" title="什么是枪版？DVD版、BD版？">&nbsp;</span></a>
+						<h1 id="filmNameId" class="font14w">狄仁杰之四大天王</h1>
+						<span>
+						  <a href="javasript:void(0)">癫狂背后是蓬勃的生命力</a>&nbsp;
+						         更新至BD中字
+						</span> <br />
+						<div class="clearfix">
+							<span class="span_block">
+							    <span class="font_888">标签:</span>
+								<a id="lableId" href="javasript:void(0)">国语</a>&nbsp;
+							</span> 
+								<span class="span_block">
+									<span class="font_888">地区:</span>
+									<a id="areaId" href="javasript:void(0)">香港</a>&nbsp;
+							     </span> <br>
+							    <span class="span_block">
+							        <span class="font_888">语言：</span>
+								    <a href="javasript:void(0)">国语</a>&nbsp; 
+								</span> 
+						</div>
+
+						<video id="video" width="100%" height="100%" controls>
+							<source id="videoscr" src="" type="video/mp4">
+							您的浏览器不支持Video标签。
+						</video>
+
+
+						<div class="clearfix" style="margin-bottom: 5px;">
+							<span id="gradeId" class="span_block"> <span class="font_888">上映时间:</span>
+								<span class="score sc7"></span>
+								<a id="onTimeId" href="javasript:void(0)"></a>&nbsp;
+							</span>
+							
+							<span class="span_block"> <span class="font_888">豆瓣评分：</span>
+								<span class="score sc7"></span>
+								<a id="gradeId" href="javasript:void(0)">6.5</a>&nbsp;
+							</span>
+						</div>
+
+					<div class="clearfix" id="movie_content" style="width: 440px;">
+						<span class="font_888">剧情介绍：</span>
+						<a id="introduceId" href="javasript:void(0)">编辑整理</a>&nbsp;
+					</div>
+					</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		$("#video").hide();
+		var data = $(".header-bottom").data("rowData");
+		// console.log(data)
+		// alert(data.route)
+		$("#detailImgId").prop("src", data.route);
+		$("#lableId").html(data.lable);
+		$("#filmNameId").html(data.name);
+
+		$("#areaId").html(data.area);
+		$("#onTimeId").html(data.onTime);
+		$("#gradeId").html(data.area);
+		$("#introduceId").html(data.introduce);
+	})
+
+	//视频播放事件
+	$("#voidplay").click(function() {
+		var name=$("#filmNameId").html();
+
+		dostatrfilm(name);
+
+	});
+	//点击播放视频
+	function dostatrfilm(name) {
+		$("#video").show();
+		var params = {"name":name};
+		var url="film/doFindObjectByNamelooking.do"
+		$.getJSON(url, params, function(result){
+			if(result.state==1){
+				document.getElementById("video").src=result.data[0].voidelink;
+				document.getElementById("video").play();
+			}else{
+				alert(result.message);
+			}
+
+		});
+
+		// });
+	}
+</script>
